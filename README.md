@@ -4,11 +4,14 @@ An AI-powered enterprise policy assistant that enables employees to upload compa
 
 The application leverages LangGraph-based agent orchestration, semantic vector search with ChromaDB, and citation verification to generate reliable, source-grounded responses while minimizing hallucinations.
 
+
 A Streamlit-powered AI agent that answers employee questions about company policies using **dynamic PDF upload**, **ChromaDB vector search**, a **LangGraph ReAct agent** backed by Groq LLM, and **citation verification**.
 
 ## Agentic Workflow
 
 Unlike a traditional RAG pipeline, this project uses a LangGraph ReAct agent that dynamically invokes retrieval tools before generating responses. This ensures every answer is grounded in retrieved policy documents instead of relying on the model's internal knowledge.
+
+
 ---
 
 ## Features
