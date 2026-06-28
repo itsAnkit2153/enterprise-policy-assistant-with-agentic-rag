@@ -1,7 +1,14 @@
-# Enterprise Policy Assistant — Agentic RAG
+# Enterprise Policy Assistant with Agentic RAG
+
+An AI-powered enterprise policy assistant that enables employees to upload company policy documents and receive accurate, context-aware answers using an Agentic Retrieval-Augmented Generation (RAG) pipeline.
+
+The application leverages LangGraph-based agent orchestration, semantic vector search with ChromaDB, and citation verification to generate reliable, source-grounded responses while minimizing hallucinations.
 
 A Streamlit-powered AI agent that answers employee questions about company policies using **dynamic PDF upload**, **ChromaDB vector search**, a **LangGraph ReAct agent** backed by Groq LLM, and **citation verification**.
 
+## Agentic Workflow
+
+Unlike a traditional RAG pipeline, this project uses a LangGraph ReAct agent that dynamically invokes retrieval tools before generating responses. This ensures every answer is grounded in retrieved policy documents instead of relying on the model's internal knowledge.
 ---
 
 ## Features
@@ -23,7 +30,7 @@ A Streamlit-powered AI agent that answers employee questions about company polic
 ## Project Structure
 
 ```
-policy-assistant/
+enterprise-policy-assistant-with-agentic-rag/
 ├── app.py                    # Streamlit UI entry point
 ├── requirements.txt
 ├── .env.example
@@ -78,3 +85,62 @@ Each source displays one of four statuses:
 - ⚠️ **PARTIAL** — chunk exists and source matches, but content overlap is low
 - 🔀 **WRONG_SOURCE** — chunk exists but belongs to a different file
 - ❌ **NOT_FOUND** — chunk_id does not exist in the index (hallucinated citation)
+
+## Tech Stack
+
+- Python
+- Streamlit
+- LangGraph
+- ChromaDB
+- Groq LLM
+- Hugging Face Embeddings
+- PyPDF
+- Sentence Transformers
+
+## Architecture
+
+```text
+                 PDF Upload
+                      │
+                      ▼
+             Document Loader
+                      │
+                      ▼
+                 Chunking
+                      │
+                      ▼
+          Metadata Enrichment
+                      │
+                      ▼
+                 Embeddings
+                      │
+                      ▼
+                  ChromaDB
+                      │
+                      ▼
+          LangGraph ReAct Agent
+               ├──────────────┐
+               ▼              ▼
+       Query Rewriter   Policy Retriever
+               └──────┬───────┘
+                      ▼
+                  Groq LLM
+                      │
+                      ▼
+           Citation Verification
+                      │
+                      ▼
+                    Answer
+```
+
+## Usage
+
+1. Launch the Streamlit application.
+2. Upload one or more enterprise policy PDF documents.
+3. Wait for indexing to complete.
+4. Ask questions in natural language.
+5. View the answer along with confidence score and verified citations.
+
+## Live Demo
+
+🔗 **[Enterprise Policy Assistant](https://enterprise-policy-assistant-with-agentic-rag.streamlit.app/)**
